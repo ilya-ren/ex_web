@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'home/CSS/style.css' %}">
+
+    <title>Ground Zero</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html" ><img src="{% static 'home/img/logo_GZ.png' %}"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="crud_artistas">Artistas</a>
+              </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="crud_clientes">Clientes</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="crud_obras">Obras</a>
+              </li>
+          
+              <li class="nav-item-dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               {% if user.is_authenticated %}
+                   {{user.username}}
+                {% else %}
+                   <a href="{% url 'login' %}">login</a>
+                {% endif %}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
+                </div>
+            </li>            
+            </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="bfondo">
+        <br>
+        <h1 class="subtit textb ">Bienvenido Artista</h1>
+        <br>
+      </div>
+    <div class="table-container">
+    <div class="container mt-4">
+        <h1 class="titulo text-center">Lista de Artistas Ground Zero</h1>
+        <br>
+        
+        <div id="idMensajes">
+            {% if mensaje %}
+                {{mensaje}}
+            {% endif %}
+        </div>
+        <br>
+        <table class=" table table-striped ">
+            <thead class="thead-dark">            
+                <th>Rut</th>
+                <th>Alias</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Modificar</th>
+                <th>Eliminar</th>            
+            </thead>
+            {% for x in artista %}
+                <tr>
+                    <td>{{ x.rut }}</td>
+                    <td>{{ x.alias }}</td>
+                    <td>{{ x.first_name }}</td>
+                    <td>{{ x.last_name }}</td>
+                    <td>{{ x.email }}</td>
+                    <td><a href="{% url 'artistas_edit' pk=x.rut %}">Modificar</a></td>
+                    <td><a href="{% url 'artistas_del' pk=x.rut %}">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <div class="text-center">
+            <button type="button " class="btn btn-info btn-lg">
+                <a href="{% url 'artistas_add' %}"  style="color:aliceblue; font-weight: bold;">Agregar</a>
+            </button>
+        </div>
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#idMensajes").delay(2000).fadeOut("slow");
+    });
+</script>
+</body>
+</html>

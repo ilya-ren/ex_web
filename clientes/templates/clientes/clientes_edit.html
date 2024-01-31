@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroundZero</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'home/CSS/style.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html" ><img src="{% static 'home/img/logo_GZ.png' %}"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="crud_artistas">Artistas</a>
+              </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="crud_clientes">Clientes</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="crud_obras">Obras</a>
+              </li>
+          
+              <li class="nav-item-dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               {% if user.is_authenticated %}
+                   {{user.username}}
+                {% else %}
+                   <a href="{% url 'login' %}">login</a>
+                {% endif %}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
+                </div>
+            </li>            
+            </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container mt-4">
+        <h1 class="titulo text-center">Editar Clientes</h1>
+        <br><br>
+        <form action="{% url 'clientes_edit' pk=cliente.rut %}" method="POST" class="text-center jus-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Rut</span>
+                    </div>
+                    <input type="number" name="rut" value="{{cliente.rut}}" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Contraseña</span>
+                    </div>
+                    <input type="password" name="password" value="{{cliente.password}}" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Correo</span>
+                    </div>
+                    <input type="email" name="email" value="{{cliente.email}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Nombre</span>
+                    </div>
+                    <input type="text" name="first_name" value="{{cliente.first_name}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Apellido Paterno</span>
+                    </div>
+                    <input type="text" name="last_name" value="{{cliente.last_name}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Apellido Materno</span>
+                    </div>
+                    <input type="text" name="ap_materno" value="{{cliente.ap_materno}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Fecha de nacimiento</span>
+                    </div>
+                    <input type="date" name="fec_nac" value="{{cliente.fec_nac|date:'Y-m-d'}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Tel&eacute;fono</span>
+                    </div>
+                    <input type="tel" name="tele" value="{{cliente.tele}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Regi&oacute;n</span>
+                    </div>
+                    <input type="text" name="region" value="{{cliente.region}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Ciudad</span>
+                    </div>
+                    <input type="text" name="ciudad" value="{{cliente.ciudad}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Comuna</span>
+                    </div>
+                    <input type="text" name="comuna" value="{{cliente.comuna}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Direcci&oacute;n</span>
+                    </div>
+                    <input type="text" name="dire" value="{{cliente.dire}}" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-info btn-lg" name="opcion" style="font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: #1b3248;">Actualizar</button>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-info btn-lg" style="color: aliceblue;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                            <a href="{% url 'crud_clientes' %}" style="color: aliceblue;">Volver</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>  
+        <br>
+        <div id="idMensajes">
+            {% if mensaje %}
+            {{mensaje}}
+            {% endif %}
+        </div> 
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
