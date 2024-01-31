@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Denkion</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'administrador/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
     <script src="{% static 'administrador/js/validar.js' %}"></script>
 </head>
 <body>
@@ -37,7 +37,7 @@
                {% if user.is_authenticated %}
                    {{user.username}}
                 {% else %}
-                   <a href="{% url 'login' %}">login</a>
+                   <a href="{% url 'login' %}">Login</a>
                 {% endif %}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -51,9 +51,9 @@
       </nav>
       
     <div class="container mt-3 mx-auto">
-        <h2 class="col-md-6 mx-auto">Iniciar sesi&oacute;n</h2>
+        <h2 class="col-md-6 mx-auto">Iniciar sesi&oacute;n - Clientes</h2>
         <br>
-        <form id="valido" method="POST" action="{% url 'login' %}">
+        <form id="valido" method="POST" action="{% url 'iniciar_sesion_cliente' %}">
             {% csrf_token %}
             <div class="form-group col-md-6 mx-auto">
               <label for="inputEmail">Correo Electr&oacute;nico</label>
