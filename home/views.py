@@ -10,6 +10,10 @@ def index(request):
     context = {}
     return render(request, 'home/index.html', context)
 
+def galeria(request):
+    context = {}
+    return render(request, 'home/galeria.html', context)
+
 def redirigir_login(request):
     tipo_usuario = request.POST.get('tipo_usuario')
 

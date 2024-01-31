@@ -6,5 +6,6 @@ urlpatterns = [
     path('login-principal/', views.login_principal, name='login-principal'),
     path('redirigir-login/', views.redirigir_login, name='redirigir-login'),
     path('index/', views.index, name='home-index'),
+    path('galeria', views.galeria, name='galeria')
    
 ]
